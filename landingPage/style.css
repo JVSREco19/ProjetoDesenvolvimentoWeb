@@ -133,4 +133,20 @@ html {
 #galeria {
     background: linear-gradient(0deg, rgba(2,0,36,1) 15%, rgba(44,9,121,1) 50%, rgba(8, 55, 143, 0.89) 100%);
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#galeria-imagens {
+    height: 90%;
+    width: 90%;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+
+#galeria-imagens img{
+    width: 250px ;
+    height: 250px;
+    margin: 10px;
 }

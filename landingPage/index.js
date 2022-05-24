@@ -1,19 +1,15 @@
 function mint() {
-    fetch("https://jsonplaceholder.typicode.com/photos/1")
+    fetch("https://jsonplaceholder.typicode.com/photos/" + Math.floor(Math.random() * 100))
     .then(function (response) {
         return response.json();
     })
-    .then((json) => console.log(json));
-    /*
     .then(function (json) {
-        for(let item of json){
-            
-            let imageNFT = document.createElement("img");
-            imageNFT.append(item.url);
-            document.getElementById("image").appendChild(imageNFT);
-        }
+        document.getElementById("imagem1").src = json.url;
+        let imgNFT = document.createElement("img");
+        imgNFT.src = json.url;
+        document.getElementById("galeria-imagens").append(imgNFT);
     })
     .then(function (err) {
         console.log(err);
-    })*/
+    })
 }
