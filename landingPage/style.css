@@ -119,6 +119,7 @@ html {
 
 #projetistas-box ul li a {
     text-decoration: none;
+    color: darkgrey;
 }
 
 #projetistas-box ul li a:hover {
