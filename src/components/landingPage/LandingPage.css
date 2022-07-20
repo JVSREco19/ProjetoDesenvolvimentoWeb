@@ -103,7 +103,7 @@ html {
     flex-direction: column;
     align-items: center;
     width: 350px;
-    height: 400px;
+    height: 500px;
     border: 0.4rem;
     border-radius: 10px;
     border-color: darkgray;
@@ -134,8 +134,13 @@ html {
 
 #projetistas-image {
     border-radius: 50%;
-    height: 200px;
-    width: 200px;
+    height: 308px;
+    width: 263px;
+}
+#projetistas-image-2 {
+    border-radius: 50%;
+    height: 300px;
+    width: 250px;
 }
 
 #galeria {
