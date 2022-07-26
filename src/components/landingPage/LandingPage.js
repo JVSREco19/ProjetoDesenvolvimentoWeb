@@ -1,6 +1,5 @@
 import './LandingPage.css';
 import styled, { css } from 'styled-components'
-import { AiOutlineDelete } from "react-icons/ai";
 import React, { useState } from 'react';
 
 function LandingPage() {
@@ -73,8 +72,6 @@ function LandingPage() {
 
   function mint() {
 
-    var id = 1;
-
     fetch("https://jsonplaceholder.typicode.com/photos/" + Math.floor(Math.random() * 100))
       .then(function (response) {
         return response.json();
@@ -84,13 +81,15 @@ function LandingPage() {
         let imgNFT = document.createElement("img");
         let buttonConfig = document.createElement("button");
         let divImage = document.createElement("div");
+        let icon = document.createElement("AiOutlineDelete");
         imgNFT.src = json.url;
-        imgNFT.id = "imgNFT"
-        divImage.id = "box-image" + {id};
-        buttonConfig.id = "buttonDelete"  
+        imgNFT.id = "imgNFT";
+        divImage.id = "box-image";
+        buttonConfig.id = "buttonDelete";
         document.getElementById("galeria-imagens").append(divImage);
-        document.getElementById("box-image"+{id}).append(imgNFT);
-        document.getElementById("box-image"+{id}).append(buttonConfig);
+        divImage.append(imgNFT);
+        divImage.append(buttonConfig);
+        buttonConfig.append(icon)
       })
       .then(function (err) {
         console.log(err);
@@ -130,7 +129,7 @@ function LandingPage() {
 
         <section id="galeria">
           <div id="galeria-imagens">
-            
+
           </div>
         </section>
 

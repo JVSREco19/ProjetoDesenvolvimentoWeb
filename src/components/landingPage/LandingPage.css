@@ -130,6 +130,8 @@ html {
     align-items: center;
 }
 #galeria-imagens {
+    display: flex;
+    flex-flow: row wrap;
     height: 80%;
     width: 90%;
     overflow: scroll;
@@ -138,7 +140,10 @@ html {
 }
 
 #galeria-imagens div{
-    display: block;
+    position: relative;
+    width: 250px;
+    height: 300px;
+    margin: 10px;
 }
 
 #galeria-imagens img{
@@ -147,8 +152,29 @@ html {
     margin: 10px;
 }
 
+#galeria-imagens button:active {
+    background-color: #3e8e41;  
+     box-shadow: 0 5px #666;   
+     transform: translateY(4px);
+}
+
 #galeria-imagens button{
-    width: 20px;
+    position: absolute;
+    background-image: url("/src/img/closedTrash.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 25px;
     height: 25px;
+    margin-top: -260px;
+    margin-left: 230px;
+    opacity: 0.25;
+}
+
+#galeria-imagens button:hover {
+    background-image: url("/src/img/openTrash.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 1;
 }
 
