@@ -41,10 +41,17 @@ html {
     color: white;
 }
 
+#input {
+    margin-top: 20px;
+    border-radius: 5%;
+    height: 1.5rem;
+}
+
 #mint-button {
     height: 30px;
     width: 100px;
     margin-top: 10%;
+    margin-bottom: 10%;
     border-radius: 15%;
     border-style: inherit;
     font-weight: bold;

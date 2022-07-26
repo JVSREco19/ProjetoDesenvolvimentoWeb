@@ -1,6 +1,7 @@
 import './LandingPage.css';
 import styled, { css } from 'styled-components'
-import React, { useState } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from 'react';
 
 function LandingPage() {
 
@@ -69,6 +70,18 @@ function LandingPage() {
   `
 
   const [open, setOpen] = useState(false);
+  const [images, setImages] = useState([]);
+  const [urlImage, setUrlImage] = useState("");
+
+
+  const url = "https://appnftbackends.herokuapp.com/"
+
+  useEffect(() => {
+    fetch(url + "images")
+      .then((response) => response.json())
+      .then((data) => setImages(data))
+      .catch((err) => console.log(err));
+  }, [url]);
 
   function mint() {
 
@@ -89,13 +102,25 @@ function LandingPage() {
         document.getElementById("galeria-imagens").append(divImage);
         divImage.append(imgNFT);
         divImage.append(buttonConfig);
-        buttonConfig.append(icon)
       })
       .then(function (err) {
         console.log(err);
       })
 
   }
+
+  function addNFT() {
+    if (urlImage !== "") {
+      axios.post(url + "images", {
+        urlImage: urlImage
+      })
+        .then()
+        .catch((err) => console.log(err));
+    } else {
+      console.log("Preencha os campos.")
+    }
+  }
+
   return (
     <div className="LandingPage">
       <body>
@@ -119,8 +144,14 @@ function LandingPage() {
         <section id="mint-page">
 
           <div id="mint-box">
+
             <h1 id="mint-title">Clique no botão abaixo para receber sua NFT.</h1>
             <button id="mint-button" type="button" onClick={mint}>Mint</button>
+            
+            <h1 id="mint-title">Ou então crie sua própria NFT e adicione a galera</h1>
+            <input id="input" type="text" value={urlImage} onChange={(e) => setUrlImage(e.target.value)} placeholder='Url Imagem'></input>
+            <button id="mint-button">Adicionar</button>
+        
           </div>
           <div id="image">
             <img id="imagem1" src="./../assets/img/nothing.png"></img>
