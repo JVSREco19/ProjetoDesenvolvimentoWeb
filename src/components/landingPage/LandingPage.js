@@ -33,7 +33,7 @@ function LandingPage() {
 
           <div id="mint-box">
             <h1 id="mint-title">Clique no botão abaixo para receber sua NFT.</h1>
-            <button id="mint-button" type="button" onclick="mint()">Mint</button>
+            <button id="mint-button" type="button" onClick={mint}>Mint</button>
           </div>
           <div id="image">
             <img id="imagem1" src="./../assets/img/nothing.png"></img>
