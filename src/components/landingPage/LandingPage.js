@@ -1,11 +1,8 @@
 import './LandingPage.css';
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
-
-function LandingPage() {
-
-  const StyledIcone = styled.div`
+const StyledIcone = styled.div`
     width: 2rem;
     height: 2rem;
     top: 15px;
@@ -40,7 +37,7 @@ function LandingPage() {
 
   `;
 
-  const StyledLista = styled.ul`
+const StyledLista = styled.ul`
     transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
     display: flex;
     flex-flow: column nowrap;
@@ -68,6 +65,9 @@ function LandingPage() {
       color: rgba(93, 59, 214, 0.945);
     }
   `
+function LandingPage() {
+
+
 
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState([]);
@@ -84,37 +84,48 @@ function LandingPage() {
   }, [url]);
 
   function mint() {
+    const randomImg = images[Math.floor(Math.random() * images.length)]
+    document.getElementById("imagem1").src = randomImg.url;
+    let imgNFT = document.createElement("img");
+    let buttonConfig = document.createElement("button");
+    let divImage = document.createElement("div");
+    imgNFT.src = randomImg.url;
+    imgNFT.id = randomImg.id;
+    divImage.id = "divBox" + randomImg.id;
+    buttonConfig.id = "buttonDelete";
+    document.getElementById("galeria-imagens").append(divImage);
+    divImage.append(imgNFT);
+    divImage.append(buttonConfig);
+  }
 
-    fetch("https://jsonplaceholder.typicode.com/photos/" + Math.floor(Math.random() * 100))
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (json) {
-        document.getElementById("imagem1").src = json.url;
-        let imgNFT = document.createElement("img");
-        let buttonConfig = document.createElement("button");
-        let divImage = document.createElement("div");
-        let icon = document.createElement("AiOutlineDelete");
-        imgNFT.src = json.url;
-        imgNFT.id = "imgNFT";
-        divImage.id = "box-image";
-        buttonConfig.id = "buttonDelete";
-        document.getElementById("galeria-imagens").append(divImage);
-        divImage.append(imgNFT);
-        divImage.append(buttonConfig);
-      })
-      .then(function (err) {
-        console.log(err);
-      })
-
+  function deleteImg(idToDelete) {
+    console.log("rodou")
+    let divIMG = document.getElementById(idToDelete)
+    document.removeChild(divIMG)
   }
 
   function addNFT() {
     if (urlImage !== "") {
       axios.post(url + "images", {
-        urlImage: urlImage
+        url: urlImage
       })
-        .then()
+        .then((response) => {
+          document.getElementById("imagem1").src = urlImage;
+          let imgNFT = document.createElement("img");
+          let buttonConfig = document.createElement("button");
+          let divImage = document.createElement("div");
+          imgNFT.src = urlImage;
+          imgNFT.id = response.data.obj.id;
+          divImage.id = "divBox" + response.data.obj.id;
+          buttonConfig.id = "buttonDelete";
+          buttonConfig.onclick = function () {
+            deleteImg(divImage.id)
+            console.log(divImage.id)
+          }
+          document.getElementById("galeria-imagens").append(divImage);
+          divImage.append(imgNFT);
+          divImage.append(buttonConfig);
+        })
         .catch((err) => console.log(err));
     } else {
       console.log("Preencha os campos.")
@@ -147,11 +158,11 @@ function LandingPage() {
 
             <h1 id="mint-title">Clique no botão abaixo para receber sua NFT.</h1>
             <button id="mint-button" type="button" onClick={mint}>Mint</button>
-            
+
             <h1 id="mint-title">Ou então crie sua própria NFT e adicione a galera</h1>
             <input id="input" type="text" value={urlImage} onChange={(e) => setUrlImage(e.target.value)} placeholder='Url Imagem'></input>
-            <button id="mint-button">Adicionar</button>
-        
+            <button id="mint-button" onClick={addNFT}>Adicionar</button>
+
           </div>
           <div id="image">
             <img id="imagem1" src="./../assets/img/nothing.png"></img>
